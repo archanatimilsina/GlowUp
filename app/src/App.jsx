@@ -15,11 +15,9 @@ const App = () => {
   <Route path="/register" element={<Register/>} />
 
 <Route path="/" element={<MainLayout />}>
- <Route path="/products" element={<ProductPage />} index/>
+ <Route path="/product" element={<ProductPage />} index/>
  <Route path="/profile" element={<ProfilePage />} />
 <Route path="/datafillUp" element={<SkinDataForm />} />
-
-
 </Route>
 
 </Routes>
