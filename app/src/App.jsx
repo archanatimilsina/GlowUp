@@ -1,10 +1,29 @@
-import Footer from "./components/Footer";
-import Navbar from "./components/Navbar";
+
+import ProductPage from './components/ProductPage';
+import ProfilePage from './components/ProfilePage'
+import SkinDataForm from './components/SkinDataForm'
+import Login from './components/Login'
+import Register from './components/Register'
+import MainLayout from "./components/MainLayout";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 const App = () => {
   return <>
-<Navbar/>
+<BrowserRouter>
+<Routes>
+  <Route path="/login" element={<Login/>} />
+  <Route path="/register" element={<Register/>} />
 
-<Footer/>
+<Route path="/" element={<MainLayout />}>
+ <Route path="/products" element={<ProductPage />} index/>
+ <Route path="/profile" element={<ProfilePage />} />
+<Route path="/datafillUp" element={<SkinDataForm />} />
+
+
+</Route>
+
+</Routes>
+</BrowserRouter>
   </>
 }
 
