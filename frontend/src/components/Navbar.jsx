@@ -8,9 +8,9 @@ const Navbar = () => {
 <li href="#">Profile</li>
 <li href="#">Skin Data FillUp form</li>
 <li href="#">Face Scanning Page</li>
-<RlButton name="LogIn"/>
-<RlButton name="Register"/>
-<RlButton name="LogOut"/>
+<RlButton name="LogIn" link="/login"/>
+<RlButton name="Register" link="/register"/>
+<RlButton name="LogOut" link=""/>
 </ul>
   </NavBar>
 }

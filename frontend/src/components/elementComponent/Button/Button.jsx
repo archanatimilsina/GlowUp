@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 
-const RlButton = ({name}) => {
-  return <RLButton>{name}
+const RlButton = ({name,link}) => {
+  return <a href={link}>
+    <RLButton>{name} 
   </RLButton>
+  </a>
 }
 
 export default RlButton
