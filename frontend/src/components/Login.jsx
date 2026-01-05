@@ -1,16 +1,74 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
+import useFetch from '../hooks/useFetch'
 
 const Login = () => {
+  const url ="http://127.0.0.1:8000/api/login/"
+  const {error , loading, fetchData} = useFetch(url)
+  const [formData , setFormData] = useState({
+    'emailOrUsername' : "",
+    "password": "",
+  })
+ const [errorMessage, setErrorMessage] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
+  if(error){
+    alert(error)
+  }
+const handleChange=(e)=>
+{
+  setFormData({
+    ...formData,
+    [e.target.name]: e.target.value
+  })
+}
+
+const handleSubmit =async (e)=>
+{
+  e.preventDefault();
+
+
+  const options ={
+    method:"POST",
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify({
+      emailOrUsername: formData.emailOrUsername,
+      password: formData.password
+    })
+  }
+const result = await fetchData(options);
+
+      if (result.message) {
+        setSuccessMessage(result.message);
+        setFormData({
+          emailOrUsername: "",
+          password: "",
+        });
+      } else {
+        setErrorMessage(result.error || "login failed.");
+      }
+
+
+}
+
+  
+
+
+
+
+
   return (
     <Container>
       <FormWrapper>
         <Title>GlowUp</Title>
         <Subtitle>Login to your account</Subtitle>
-        <Form>
-          <Input type="email" placeholder="Email" />
-          <Input type="password" placeholder="Password" />
-          <Button type="submit">Login</Button>
+        {errorMessage && <ErrorText>{errorMessage}</ErrorText>}
+        {successMessage && <SuccessText>{successMessage}</SuccessText>}
+        <Form onSubmit={handleSubmit}>
+          <Input type="text" placeholder="Email or username" name="emailOrUsername" onChange={handleChange} value={formData.emailOrUsername}/>
+          <Input type="password" placeholder="Password" onChange={handleChange} name="password" value={formData.password}/>
+          <Button type="submit" disabled={loading}>{loading ? 'Logging': 'Login'}</Button>
         </Form>
         <Forgot>
           Forgot your password? <Link href="/register">Reset</Link>
@@ -100,6 +158,18 @@ const Link = styled.a`
   &:hover {
     text-decoration: underline;
   }
+`;
+
+const ErrorText = styled.p`
+  color: #d32f2f;
+  margin-bottom: 16px;
+  font-size: 14px;
+`;
+
+const SuccessText = styled.p`
+  color: #388e3c;
+  margin-bottom: 16px;
+  font-size: 14px;
 `;
 
 export default Login;

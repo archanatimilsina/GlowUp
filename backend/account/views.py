@@ -39,8 +39,6 @@ def register(request):
 #register
 
 
-
-
 @csrf_exempt
 def login(request):
     if request.method != "POST":
@@ -49,19 +47,24 @@ def login(request):
     try:
         data = json.loads(request.body)
 
-        username = data.get("username")
+        emailOrUsername = data.get("emailOrUsername")
         password = data.get("password")
 
-        if not username or not password:
-            return JsonResponse({"error": "Username and password required"}, status=400)
+        if not emailOrUsername or not password:
+            return JsonResponse({"error": "Username or email and password required"}, status=400)
+        
 
-        user = authenticate(username=username, password=password)
+        if '@' in emailOrUsername:
+            user = User.objects.filter(email= emailOrUsername).first()
+            if user:
+                authenticate_user= authenticate(username =user.username,password= password)
+        else:
+                authenticate_user= authenticate(username= emailOrUsername,password= password)
 
-        if user is None:
+        if authenticate_user is None:
             return JsonResponse({"error": "Invalid credentials"}, status=401)
 
-        django_login(request, user)
-
+        django_login(request, authenticate_user)
         return JsonResponse({"message": "Login successful"})
 
     except json.JSONDecodeError:
