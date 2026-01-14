@@ -87,7 +87,6 @@ row_index= dataset.index[dataset["picture_src_count"]!=200]
 dataset.drop(index=row_index,inplace=True)
 print(dataset["picture_src_count"]) 
 
-
 # translate description from indonesian to english and put those into the new column 'description_en'
 from deep_translator import GoogleTranslator
 
@@ -95,7 +94,6 @@ def translate_en(text):
     return GoogleTranslator(source='id', target='en').translate(text)
 dataset["description_en"] = dataset["description"].apply(translate_en)
 print(dataset['description_en'])
-
 
 # make a column 'Rating' and enter random numbers into it between 0 to 5
 import random
