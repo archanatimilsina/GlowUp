@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from "styled-components";
 import RlButton from './elementComponent/Button/Button';
-import { useNavigate } from "react-router-dom";
+import {Link, useNavigate } from "react-router-dom";
 import useFetch from '../hooks/useFetch.js'
 const Navbar = () => {
 const url ="http://127.0.0.1:8000/api/logout/"
@@ -33,10 +33,10 @@ navigate("/register");
   return <NavBar>
     
 <ul>
-<li href="/product">Product</li>
-<li href="/profile">Profile</li>
-<li href="/datafillUp">Skin Data form</li>
-<li href="/faceScanPage">Face Scan</li>
+<li><Link to="/product">Product</Link></li>
+  <li><Link to="/profile">Profile</Link></li>
+  <li><Link to="/datafillUp">Skin Data form</Link></li>
+  <li><Link to="/faceScanPage">Face Scan</Link></li>
 <RlButton name="LogIn" link="/login"/>
 <RlButton name="Register" link="/register"/>
 <RlButton name="LogOut" onClick={logout}/>
@@ -66,15 +66,21 @@ ul{
 ul li{
   font-weight: 600;
   font-size: 19px;
+  cursor: pointer;
   &:hover{
 background-color: #86A788;
 color: white;
 transition: all 0.05s ease-in-out;
-/* border: 1px transparent solid; */
 border-radius:10%;
 padding: 5px;
 transform: translateY(-5px);
 
   }
+a{
+  text-decoration: none;
+  color: inherit;
+
 }
+}
+
 `;
