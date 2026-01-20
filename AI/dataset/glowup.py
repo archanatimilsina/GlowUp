@@ -105,4 +105,7 @@ print(random_numbers)
 print(len(random_numbers))
 dataset['Rating']= random_numbers
 
+# rename column name
+dataset = dataset.rename(columns={'description_en':'description','Rating':'rating','skintype':"skin_type"})
 
+#
