@@ -1,237 +1,249 @@
 import React from "react";
-import { styled } from 'styled-components';
-const Dashboard = () => {
+import styled from "styled-components";
+import { FiEdit2, FiChevronRight } from "react-icons/fi";
+import { MdOutlineMedicalServices } from "react-icons/md";
+
+const SkinDataForm = () => {
   return (
-    <ProfileContainer>
-      <header className="navbar">
-        <h2>✨ GlowUp</h2>
-      </header>
+    <SkinDataform>
+      <Card>
+        {/* Profile */}
+        <Profile>
+          <Avatar>
+            <img src="https://i.pinimg.com/originals/36/fa/71/36fa711939d05bb0817fb3872e93918f.jpg" alt="profile" />
+            <EditBtn>
+              <FiEdit2 size={12} /> Edit
+            </EditBtn>
+          </Avatar>
 
-      <div className="container">
-        <div className="left">
-          <div className="card profile">
-            <img
-              src="https://via.placeholder.com/110"
-              alt="profile"
-            />
+          <h2>Sarah Jenkins</h2>
+          <p>Sarah.j@example.com</p>
+        </Profile>
 
-            <h3>Sarah Anderson</h3>
+        {/* Skin Info */}
+        <Grid>
+          <InfoCard>
+            <span>Skin Tone</span>
+            <strong>
+              <Dot /> Medium
+            </strong>
+          </InfoCard>
 
-            <p>
-              Combination Skin
-              <br />
-              <br />
-              24 Years
-            </p>
+          <InfoCard>
+            <span>Skin Type</span>
+            <strong>Oily</strong>
+          </InfoCard>
+        </Grid>
 
-            <div className="status">
-              <div>
-                <h4></h4>
-                <p></p>
-              </div>
-              <div>
-                <h4></h4>
-                <p></p>
-              </div>
+        {/* Primary Concern */}
+        <ConcernCard>
+          <div>
+            <span>Primary Concern</span>
+            <h4>Acne Control</h4>
+          </div>
+          <Pulse />
+        </ConcernCard>
+
+        {/* Skin Form */}
+        <FormRow>
+          <div className="left">
+            <MdOutlineMedicalServices />
+            <div>
+              <h5>Skin Form Fillup</h5>
+              <p>Update your details</p>
             </div>
           </div>
+          <FiChevronRight />
+        </FormRow>
 
-          <div className="card">
-            <h4>Skin Analysis</h4>
+        <Divider>OR</Divider>
 
-            <p
-              style={{
-                margin: "10px 0 20px",
-                color: "var(--text-light)",
-              }}
-            >
-            </p>
+        {/* CTA */}
+        <CTA>Start Skin Analysis</CTA>
 
-            <button>Start New Scan</button>
-          </div>
-        </div>
-
-        <div className="right">
-          <h1>Good Morning, Sarah 🌞</h1>
-          <p>Your skin looks radiant today. Keep up the great routine.</p>
-
-          <div className="routine">
-            <div className="item">
-              <div>
-                <h4>cmkcdnjdsnjcn</h4>
-                <p>Cleanser • Daily</p>
-              </div>
-              <span className="" />
-            </div>
-
-            <div className="item">
-              <div>
-                <h4>ncjdsbchbdscbdsb</h4>
-                <p>Serum • Daily</p>
-              </div>
-              <span className="" />
-            </div>
-
-            <div className="item">
-              <div>
-                <h4>nnmcxnvbdjvjdn</h4>
-                <p>Sunscreen • Daily</p>
-              </div>
-              <span className="" />
-            </div>
-          </div>
-        </div>
-      </div>
-    </ProfileContainer>
+        {/* Sign out */}
+        <SignOut>Sign Out</SignOut>
+      </Card>
+    </SkinDataform>
   );
 };
 
-export default Dashboard;
+export default SkinDataForm;
 
-const ProfileContainer = styled.main`
-   /* :root {
-            --primary: #3f6f59;
-            --secondary: #86a788;
-            --bg: #86A788 ;
-            --card: #ffffff;
-            --text-dark: #2e2e2e;
-            --text-light: #6b6b6b;
-        } */
-      
-        .navbar {
-            padding: 18px 50px;
-            background: #ffffff;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        }
+const SkinDataform = styled.main`
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+`;
 
-        .navbar h2 {
-            color:  #3f6f59;
-            font-weight: 600;
-        } 
+const Card = styled.section`
+  width: 360px;
+  background: #fff;
+  border-radius: 24px;
+  padding: 28px 22px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+`;
 
-     
-        .container {
-            display: flex;
-            gap: 32px;
-            padding: 40px 50px;
-        }
+const Profile = styled.div`
+  text-align: center;
 
-   
-        .left {
-            width: 30%;
-        }
+  h2 {
+    margin-top: 12px;
+    font-weight: 600;
+  }
 
-        .card {
-            background: #ffffff;
-            padding: 25px;
-            border-radius: 18px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.06);
-        }
+  p {
+    font-size: 14px;
+    color: #7a7a7a;
+  }
+`;
 
-        .profile {
-            text-align: center;
-        }
+const Avatar = styled.div`
+  position: relative;
+  width: 110px;
+  margin: auto;
 
-        .profile img {
-            width: 110px;
-            border-radius: 50%;
-            margin-bottom: 12px;
-        }
+  img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+`;
 
-        .profile h3 {
-            margin-bottom: 5px;
-        }
+const EditBtn = styled.button`
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background: #5f8572;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  font-size: 11px;
+  border-radius: 14px;
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  cursor: pointer;
+`;
 
-        .profile p {
-            color: #6b6b6b;
-            font-size: 14px;
-        }
+const Grid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 24px;
+`;
 
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+const InfoCard = styled.div`
+  background: #fff;
+  border-radius: 16px;
+  padding: 14px;
+  border: 1px solid #eee;
 
-        .stats div {
-            text-align: center;
-        }
+  span {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #8a8a8a;
+  }
 
-        .stats h4 {
-            color:  #3f6f59;
-            font-size: 22px;
-        }
+  strong {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-weight: 500;
+  }
+`;
 
-        .stats p {
-            font-size: 13px;
-            color: #6b6b6b;
-        }
+const Dot = styled.span`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #e6b99d;
+`;
 
-        button {
-            background:  #3f6f59;
-            color: white;
-            border: none;
-            padding: 12px;
-            width: 100%;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s ease;
-        }
+const ConcernCard = styled.div`
+  margin-top: 16px;
+  padding: 16px;
+  border-radius: 18px;
+  background: #fff;
+  border: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-        button:hover {
-            background: #2f5745;
-        }
+  span {
+    font-size: 11px;
+    color: #8a8a8a;
+  }
 
-       
-        .right {
-            width: 70%;
-        }
+  h4 {
+    margin-top: 6px;
+    font-weight: 500;
+  }
+`;
 
-        .right h1 {
-            font-size: 28px;
-            margin-bottom: 6px;
-        }
+const Pulse = styled.div`
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #33815b;
+`;
 
-        .right p {
-            color: #6b6b6b;
-            margin-bottom: 25px;
-        }
+const FormRow = styled.div`
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
 
-        .right h3 {
-            margin-bottom: 15px;
-            color:  #3f6f59;
-        }
+  .left {
+    display: flex;
+    gap: 10px;
+    align-items: center;
 
-        .routine .item {
-            background: #ffffff;
-            padding: 18px 22px;
-            border-radius: 16px;
-            margin-bottom: 14px;
-            box-shadow: 0 8px 20px rgba(12, 12, 12, 0.05);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+    svg {
+      font-size: 22px;
+      color: #5f8572;
+    }
+  }
 
-        .item h4 {
-            font-size: 16px;
-        }
+  h5 {
+    margin: 0;
+    font-size: 14px;
+  }
 
-        .item p {
-            font-size: 13px;
-            color:#2e2e2e;
-        }
+  p {
+    font-size: 12px;
+    color: #7a7a7a;
+  }
+`;
 
-        .badge {
-            background: #e9f3ee;
-            color:  #3f6f59;
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        } 
+const Divider = styled.div`
+  text-align: center;
+  margin: 20px 0;
+  font-size: 12px;
+  color: #aaa;
+`;
 
+const CTA = styled.button`
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: none;
+  background: #5f8572;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+`;
+
+const SignOut = styled.p`
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #e35b5b;
+  cursor: pointer;
 `;
