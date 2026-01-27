@@ -3,4 +3,5 @@ djangorestframework
 django-cors-headers
 pandas
 requests
+deep-translator
 
