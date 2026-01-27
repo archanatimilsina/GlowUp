@@ -5,11 +5,13 @@ const SkinDataForm = () => {
   return (
  
  <SkinDataform>
+  
  
  </SkinDataform> )
 }
 
 export default SkinDataForm
 const SkinDataform= styled.main`
+
 
 `;
