@@ -23,4 +23,28 @@ Exfoliators
 Masks
 Facial_oils
 
-# 
+# unique items in notable_effects
+Moisturizing
+Soothing
+Pore-Care
+Acne-Spot
+Skin-Barrier
+UV-Protection
+Oil-Control
+No-Whitecast
+Balancing
+Hydrating
+Oil-control
+Anti-Aging
+Black-Spot
+Acne-Free
+Brightening
+Refreshing
+
+
+#unique items of skin type :
+Oily
+Normal
+Dry
+Combination
+Sensitive
