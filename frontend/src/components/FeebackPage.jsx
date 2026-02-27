@@ -82,7 +82,7 @@ const FeedbackPage = () => {
           value={formData.message}
           onChange={handleChange}
           rows="4"
-          placeholder="Write your feedback here..."
+          placeholder="Write your feedback here"
           required
         />
 
@@ -113,7 +113,7 @@ align-items: center;
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
-            color: #2f4f3f;
+            color: #f76454;
         }
 
         label {
@@ -132,7 +132,10 @@ align-items: center;
             border-radius: 6px;
             font-size: 14px;
         }
+input::placeholder{
+            opacity: 0.5;
 
+}
         input:focus,
         textarea:focus {
             outline: none;
@@ -142,11 +145,14 @@ align-items: center;
         textarea {
             resize: none;
         }
+        textarea::placeholder{
+          opacity: 0.5;
+        }
 
         button {
             width: 100%;
             padding: 12px;
-            background-color: #3f6f59;
+            background-color: #fb8d80;
             color: white;
             border: none;
             border-radius: 8px;
@@ -157,6 +163,9 @@ align-items: center;
         }
 
         button:hover {
-            background-color: #2f5745;
+            background-color: white;
+            border: 1px solid black;
+            color: black;
+            transition:all 0.35s ease-in;
         }
 `;

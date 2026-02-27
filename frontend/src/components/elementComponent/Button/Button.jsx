@@ -17,8 +17,8 @@ const RlButton = ({name, link, onClick}) => {
 export default RlButton;
 
 const RLButton = styled.button`
-    background-color: #FFFFFF;
-    color: #5D2E46;                        
+    background-color: #f1897d;
+    color: white;                        
     border: none;
     padding: 10px 24px; 
     border-radius: 12px;                   
@@ -32,5 +32,7 @@ const RLButton = styled.button`
         background: rgba(255, 255, 255, 0.9);
         transform: translateY(-2px);           
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        color: black;
+
     }
 `;

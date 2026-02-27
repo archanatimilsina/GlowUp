@@ -9,6 +9,8 @@ urlpatterns = [
     path('product/', include('product.urls')),
     path('api/', include('feedback.urls')),
     path('skintoneAnalysis/', include('skin_analysis.urls')),
+    path('contact/', include('contact.urls')),
+    path('forum/', include('forum.urls')),
 ]
 
 if settings.DEBUG:

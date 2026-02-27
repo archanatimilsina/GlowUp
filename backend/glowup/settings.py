@@ -44,7 +44,10 @@ EXTERNAL_APP = [
     'account',
     'rest_framework',
     'feedback',
-    'product'
+    'product',
+    'contact',
+    'skin_analysis',
+    'forum'
 ]
 
 INSTALLED_APPS += EXTERNAL_APP
