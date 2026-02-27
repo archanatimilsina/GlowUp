@@ -1,29 +1,42 @@
 import React, { useState } from 'react';
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom"; // Added useLocation
 import { FaUserCircle } from 'react-icons/fa'; 
 import RlButton from './elementComponent/Button/Button'; 
 import useUserStore from '../store/useUserStore';
 
 const Navbar = () => {
+  const location = useLocation(); // This tells us where we are (e.g., "/product")
+  
   const [loginStatus] = useState(() => {
     return localStorage.getItem("isLoggedIn") === "true";
   });
-const {profilePic} = useUserStore();
+  
+  const { profilePic } = useUserStore();
 
-
+  // Helper function to check if we should show a link
+  const showLink = (path) => location.pathname !== path;
 
   return (
     <NavBarContainer>
       <ul>
-        <li><Link to="/product">Product</Link></li>
-        <li><Link to="/datafillUp">Skin Data</Link></li>
-        <li><Link to="/faceScanPage">Face Scan</Link></li>
-        <li><Link to="/feedback">Feedback</Link></li>
-        <li><Link to="/cartPage">Cart</Link></li>
-        <li><Link to="/buyPage">Buy Now</Link></li>
-        <li><Link to="/disscussionForum">Forum</Link></li>
-        <li><Link to="/homepage">Home</Link></li>
+        {/* Only show Home if we aren't on the Home page */}
+        {showLink("/") && <li><Link to="/">Home</Link></li>}
+
+        {/* Only show Product if we aren't on the Product page */}
+        {showLink("/product") && <li><Link to="/product">Product</Link></li>}
+
+        {/* Forum Link */}
+        {showLink("/forum/disscussionForum") && (
+            <li><Link to="/forum/disscussionForum">Forum</Link></li>
+        )}
+
+        {showLink("/cartPage") && (
+            <li><Link to="/cartPage">Cart</Link></li>
+        )}
+
+        {/* Only show About Us if we aren't on the About Us page */}
+        {showLink("/AboutUs") && <li><Link to="/AboutUs">About Us</Link></li>}
 
         {!loginStatus ? (
           <AuthButtons>
@@ -48,7 +61,7 @@ const {profilePic} = useUserStore();
 
 export default Navbar;
 
-
+// --- STYLES ---
 
 const NavBarContainer = styled.nav`
   height: 80px;
@@ -76,7 +89,7 @@ const NavBarContainer = styled.nav`
     transition: 0.3s ease;
     
     &:hover { 
-      color: #FF9A9E; 
+      color: #f1897d; /* Matches your Snowy Peach theme */
       transform: translateY(-1px);
     }
   }

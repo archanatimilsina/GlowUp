@@ -7,6 +7,7 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 
 from AI.models.skin_detection_knn import identify_skin_tone
+
 @csrf_exempt  
 def upload_skin_analysis(request):
     if request.method == 'PUT':
@@ -37,7 +38,8 @@ def upload_skin_analysis(request):
             return JsonResponse({
                 "tone": str(tone_id), 
                 "tone_name": result_name,
-                "status": "success"
+                "status": "success",
+                
             }, status=200)
 
         except Exception as e:

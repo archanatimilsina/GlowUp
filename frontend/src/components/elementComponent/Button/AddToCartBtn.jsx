@@ -16,13 +16,13 @@ outline: none;
 border: none;
 border-radius: 10px;
 font-weight: 900;
-background-color:#1A3C5A ;
+background-color:#f1897d ;
 color: white;
 
 &:hover{
   background-color: white;
-  color:#1A3C5A ;
-  border: 1px solid black;
+  color:#f1897d ;
+  border: 1px solid #f1897d;
   transition: all 0.2s ease-out;
   transform: translateY(-5px);
 

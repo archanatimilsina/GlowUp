@@ -1,4 +1,4 @@
-import React, {  useRef } from "react";
+import React, { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FiEdit2, FiChevronRight } from "react-icons/fi";
 import { MdOutlineMedicalServices } from "react-icons/md";
@@ -9,14 +9,47 @@ import useUserStore from "../store/useUserStore";
 const ProfilePage = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
-const { 
-  email, 
-  profilePic, 
-  skin_type, 
-  skin_tone, 
-  skin_concerns, 
-  setUserData
-} = useUserStore();
+
+  // We pull everything from the store
+  const { 
+    email, 
+    profilePic, 
+    skinTone,    
+    skinType,    
+    skinConcerns, 
+    setUserData,
+    logout
+  } = useUserStore();
+
+  // --- SYNC WITH DATABASE ON COMPONENT MOUNT ---
+  useEffect(() => {
+    const fetchLatestData = async () => {
+      // If no email, we can't fetch.
+      if (!email) return;
+
+      try {
+        console.log("Fetching latest data for:", email);
+        const response = await fetch(`http://127.0.0.1:8000/api/get-profile/?email=${email}`);
+        const data = await response.json();
+
+        if (response.ok) {
+          console.log("Database Response:", data);
+          
+          setUserData({
+            skinTone: data.skin_tone,    // database: skin_tone -> store: skinTone
+            skinType: data.skin_type,    // database: skin_type -> store: skinType
+            skinConcerns: data.skin_concerns, // database: skin_concerns -> store: skinConcerns
+            profilePic: data.profile_pic || profilePic
+          });
+        }
+      } catch (error) {
+        console.error("Error syncing with database:", error);
+      }
+    };
+
+    fetchLatestData();
+  }, [email, setUserData]); 
+
   const handleEditClick = () => {
     fileInputRef.current.click();
   };
@@ -36,24 +69,20 @@ const {
       });
 
       const data = await response.json();
-console.log(data)
+
       if (response.ok && data.image_url) {
-        // setImage(data.image_url);
         setUserData({ profilePic: data.image_url });
-        localStorage.setItem("profilePic", data.image_url); 
-        alert("Yay! Profile picture updated.");
-        window.location.reload();
+        alert("Success! Profile picture updated.");
       } else {
-        alert(data.error || "Something went wrong.");
+        alert(data.error || "Upload failed.");
       }
     } catch (error) {
-      console.error("Error uploading image:", error);
-      alert("Could not connect to the server.");
+      console.error("Upload error:", error);
     }
   };
 
   const handleSignOut = () => {
-    localStorage.clear();
+    logout();
     navigate("/login");
   };
 
@@ -81,45 +110,46 @@ console.log(data)
             </EditBtn>
           </Avatar>
 
-          <p>{email}</p>
+          <p className="email-text">{email}</p>
         </Profile>
 
         <Grid>
           <InfoCard>
-            <span>Skin Tone</span>
-            <strong>
-             {skin_tone ? skin_tone : "None"}
-            </strong>
+            <span>Your Skin Tone</span>
+            <strong>{skinTone || "Not Set"}</strong>
           </InfoCard>
 
           <InfoCard>
-            <span>Skin Type</span>
-            <strong>{skin_type ? skin_type : "None"}</strong>
+            <span>Your Skin Type</span>
+            <strong>{skinType || "Not Set"}</strong>
           </InfoCard>
         </Grid>
 
         <ConcernCard>
           <div>
-            <span>Primary Concern</span><br />
-              <strong>{skin_concerns ? skin_concerns : "None"}</strong>
+            <span>Primary Skin Concerns</span><br />
+            {/* We use a span here to ensure long text wraps correctly */}
+            <p className="concerns-list">
+                {skinConcerns || "No concerns listed yet"}
+            </p>
           </div>
-          <Pulse />
+          <PulseIcon />
         </ConcernCard>
 
         <FormRow onClick={() => navigate("/datafillUp")}>
           <div className="left">
             <MdOutlineMedicalServices />
             <div>
-              <h5>Skin Form Fillup</h5>
-              <p>Update your details</p>
+              <h5>Skin Details Form</h5>
+              <p>Click here to update your skin info</p>
             </div>
           </div>
           <FiChevronRight />
         </FormRow>
 
-        <Divider>OR</Divider>
+        <Divider>And</Divider>
 
-        <CTA onClick={() => navigate("/faceScanPage")}>Start Skin Analysis</CTA>
+        <CTA onClick={() => navigate("/faceScanPage")}>Start AI Face Analysis</CTA>
 
         <SignOut onClick={handleSignOut}>Sign Out</SignOut>
       </Card>
@@ -129,58 +159,56 @@ console.log(data)
 
 export default ProfilePage;
 
+// --- STYLED COMPONENTS ---
 
 const SkinDataform = styled.main`
-  min-height: 80vh;
+  min-height: 90vh;
   display: grid;
   place-items: center;
   padding: 20px;
+  background: #fdfdfd;
 `;
 
 const Card = styled.section`
   width: 100%;
-  max-width: 360px;
+  max-width: 380px;
   background: #fff;
-  border-radius: 24px;
-  padding: 28px 22px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  border-radius: 32px;
+  padding: 30px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.05);
 `;
 
 const Profile = styled.div`
   text-align: center;
-  h2 { margin-top: 12px; font-weight: 600; color: #333; }
-  p { font-size: 14px; color: #7a7a7a; }
+  .email-text { margin-top: 12px; font-size: 14px; color: #64748b; font-weight: 500; }
 `;
 
 const Avatar = styled.div`
   position: relative;
-  width: 110px;
+  width: 120px;
   margin: auto;
   img {
-    width: 110px;
-    height: 110px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #FAD0C4;
+    border: 4px solid #F1F5F9;
   }
 `;
 
 const EditBtn = styled.button`
   position: absolute;
-  bottom: 6px;
-  right: 6px;
-  background: #5f8572;
+  bottom: 5px;
+  right: 5px;
+  background: #f76454;
   color: #fff;
-  border: none;
-  padding: 4px 10px;
+  border: 2px solid #fff;
+  padding: 6px 12px;
   font-size: 11px;
-  border-radius: 14px;
-  display: flex;
-  gap: 4px;
-  align-items: center;
+  border-radius: 20px;
+  display: flex; gap: 4px; align-items: center;
   cursor: pointer;
-  transition: 0.3s;
-  &:hover { background: #4a6b5a; transform: scale(1.05); }
+  &:hover { background: #6A9C89; }
 `;
 
 const Grid = styled.div`
@@ -191,79 +219,56 @@ const Grid = styled.div`
 `;
 
 const InfoCard = styled.div`
-  background: #fff;
-  border-radius: 16px;
-  padding: 14px;
-  border: 1px solid #eee;
-  span { font-size: 11px; text-transform: uppercase; color: #8a8a8a; }
-  strong { display: flex; align-items: center; gap: 6px; margin-top: 6px; font-weight: 500; }
+  background: #F8FAFC;
+  border-radius: 20px;
+  padding: 16px;
+  span { font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 700; }
+  strong { display: block; margin-top: 4px; font-size: 15px; color: #1e293b; }
 `;
-
 
 const ConcernCard = styled.div`
   margin-top: 16px;
-  padding: 16px;
-  border-radius: 18px;
-  background: #fff;
-  border: 1px solid #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  span { font-size: 11px; color: #8a8a8a; }
-  h4 { margin-top: 6px; font-weight: 500; }
+  padding: 20px;
+  border-radius: 20px;
+  background: #F8FAFC;
+  display: flex; justify-content: space-between; align-items: center;
+  span { font-size: 10px; text-transform: uppercase; color: #94a3b8; font-weight: 700; }
+  .concerns-list { 
+    margin: 4px 0 0 0; 
+    font-size: 14px; 
+    color: #1e293b; 
+    font-weight: 600;
+    line-height: 1.4;
+  }
 `;
 
-const Pulse = styled.div`
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #B9E5FB;
+const PulseIcon = styled.div`
+  min-width: 12px; height: 12px; border-radius: 50%; background: #f76454;
+  box-shadow: 0 0 0 4px rgba(106, 156, 137, 0.2);
 `;
 
 const FormRow = styled.div`
-  margin-top: 18px;
-  padding: 14px;
-  border-radius: 16px;
-  border: 1px solid #eee;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: 0.2s;
-  &:hover { background: #f9f9f9; }
-  .left { display: flex; gap: 10px; align-items: center;
-    svg { font-size: 22px; color: #5f8572; }
-  }
-  h5 { margin: 0; font-size: 14px; }
-  p { font-size: 12px; color: #7a7a7a; }
+  margin-top: 20px; padding: 18px; border-radius: 20px; background: white; border: 1.5px solid #F1F5F9;
+  display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+  &:hover { border-color: #f76454; }
+  .left { display: flex; gap: 14px; align-items: center; svg { font-size: 24px; color: #f76454; } }
+  h5 { margin: 0; font-size: 15px; }
+  p { font-size: 12px; color: #f76454; margin: 0; }
 `;
 
 const Divider = styled.div`
-  text-align: center;
-  margin: 20px 0;
-  font-size: 12px;
-  color: #aaa;
+  text-align: center; margin: 25px 0; font-size: 12px; font-weight: 700; color: #cbd5e1; position: relative;
+  &::before, &::after { content: ""; position: absolute; top: 50%; width: 35%; height: 1px; background: #f1f5f9; }
+  &::before { left: 0; } &::after { right: 0; }
 `;
 
 const CTA = styled.button`
-  width: 100%;
-  padding: 14px;
-  border-radius: 16px;
-  border: none;
-  background: #5f8572;
-  color: #fff;
-  font-size: 15px;
-  cursor: pointer;
-  font-weight: 600;
-  &:hover { background: #4a6b5a; }
+  width: 100%; padding: 18px; border-radius: 20px; border: none; background: #f76454; color: #fff;
+  font-size: 16px; cursor: pointer; font-weight: 700;
+  &:hover { background: #0c2b27; }
 `;
 
 const SignOut = styled.p`
-  margin-top: 14px;
-  text-align: center;
-  font-size: 13px;
-  color: #e35b5b;
-  cursor: pointer;
-  font-weight: 600;
+  margin-top: 20px; text-align: center; font-size: 14px; color: #ef4444; cursor: pointer; font-weight: 700;
   &:hover { text-decoration: underline; }
 `;

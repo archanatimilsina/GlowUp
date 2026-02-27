@@ -174,3 +174,15 @@ def upload_profile_pic(request):
             return JsonResponse({'error': 'User not found'}, status=404)
 
     return JsonResponse({'error': 'Only POST allowed'}, status=405)
+
+
+from django.contrib.auth import get_user_model
+from rest_framework.views import APIView
+from rest_framework.response import Response
+
+User = get_user_model()
+
+class UserCountView(APIView):
+    def get(self, request):
+        count = User.objects.count()
+        return Response({"total_users": count})
