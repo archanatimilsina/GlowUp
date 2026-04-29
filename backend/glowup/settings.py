@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
 ]
 
-EXTERNAL_APP = [
+EXTERNAL_APPS = [
     'account',
     'rest_framework',
     'feedback',
@@ -50,7 +50,7 @@ EXTERNAL_APP = [
     'forum'
 ]
 
-INSTALLED_APPS += EXTERNAL_APP
+INSTALLED_APPS += EXTERNAL_APPS
 
 
 MIDDLEWARE = [

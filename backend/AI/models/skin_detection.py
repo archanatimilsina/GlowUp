@@ -9,7 +9,7 @@ from mediapipe.tasks.python import vision
 
 # --- 1. SETUP AI BRAIN (MediaPipe) ---
 current_dir = os.path.dirname(os.path.abspath(__file__))
-# Ensure this file is in the same folder as this script!
+# Ensure this file is in the same folder as this script
 model_path = os.path.join(current_dir, 'face_landmarker.task')
 
 if not os.path.exists(model_path):

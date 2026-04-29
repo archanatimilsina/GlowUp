@@ -139,7 +139,7 @@ const FaceScanningPage = () => {
         
         <div className="image-wrapper">
             <img
-              src={selectedImage ? URL.createObjectURL(selectedImage) : "https://img.freepik.com/premium-vector/biometric-identification-face-recognition-system-concept-face-scanning-process-mobile-phone-digital-verification-facial-landmarks-detection-vector-illustration_2175-1025.jpg"}
+              src={selectedImage ? URL.createObjectURL(selectedImage) : "https://i.pinimg.com/originals/f4/80/a3/f480a3c813b655092d2378f0bb833762.jpg"}
               alt="AI Face Scan"
               className={selectedImage ? "scan-image" : "scan-image placeholder"}
             />

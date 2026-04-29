@@ -181,7 +181,6 @@ const ProductPage = () => {
           )}
 
           <h3 className="fade-in delay-1">Products</h3>
-          {/* Added fade-in class here */}
           <div className="products fade-in delay-2">
             {currentProducts?.map((product, index) => (
               <div key={index} className='productCardContaineer'>
@@ -217,7 +216,6 @@ const ProductPage = () => {
 
 export default ProductPage;
 
-// --- ANIMATIONS ---
 const fadeUp = keyframes`
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
@@ -237,7 +235,6 @@ const MainContainer = styled.main`
   .filterContainer { width: 100%; display: flex; gap: 20px; overflow-x: auto; }
   .searchBar { display: flex; padding: 20px; gap: 10px; input { width: 200px; height: 40px; padding: 10px; } }
   
-  /* Applying Animations */
   .fade-in {
     opacity: 0;
     animation: ${fadeUp} 1s forwards;

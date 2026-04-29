@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { Heart, MessageCircle, Send, Search, ArrowLeft, User, LogOut, ChevronDown, Trash2, Plus } from "lucide-react"; 
+import { Heart, MessageCircle, Send, Search, ArrowLeft, User, LogOut, ChevronDown, Trash2, Plus, MoreHorizontal } from "lucide-react"; 
 import useUserStore from "../../store/useUserStore";
 
 const DiscussionForum = () => {
@@ -186,68 +186,68 @@ const DiscussionForum = () => {
           ) : filteredPosts.length > 0 ? (
             filteredPosts.map((post) => (
               <PostCard key={post.id}>
-                <div className="post-inner">
-                  <div className="post-body">
-                    <div className="author-row">
-                      <img 
-                        src={post.author_profile_pic 
-                          ? `http://127.0.0.1:8000${post.author_profile_pic}` 
-                          : `https://ui-avatars.com/api/?name=${post.author}&background=fce8e6&color=b76e79`} 
-                        alt={post.author} 
-                      />
-                      <div className="author-meta">
-                        <span className="name">{post.author}</span>
-                        <span className="date">{new Date(post.created_at).toLocaleDateString()}</span>
-                      </div>
-                      {post.author_email === email && (
-                        <button className="del-btn" onClick={() => handleDeletePost(post.id)}>
-                          <Trash2 size={16} />
-                        </button>
-                      )}
-                    </div>
-                    
-                    <div className="text-content">
-                      <h3>{post.title}</h3>
-                      <p>{post.content}</p>
-                    </div>
-
-                    <div className="interaction-row">
-                      <button className={`stat-pill ${post.isLiked ? 'liked' : ''}`} onClick={() => handleLike(post.id)}>
-                        <Heart size={18} fill={post.isLiked ? "#B76E79" : "none"} />
-                        {post.total_likes}
-                      </button>
-                      <button className="stat-pill" onClick={() => toggleComments(post.id)}>
-                        <MessageCircle size={18} />
-                        {post.comments?.length || 0}
-                      </button>
+                <div className="post-header">
+                  <div className="author-info">
+                    <img 
+                      src={post.author_profile_pic 
+                        ? `http://127.0.0.1:8000${post.author_profile_pic}` 
+                        : `https://ui-avatars.com/api/?name=${post.author}&background=fce8e6&color=b76e79`} 
+                      alt={post.author} 
+                    />
+                    <div className="meta">
+                      <span className="author-name">{post.author}</span>
+                      <span className="post-date">{new Date(post.created_at).toLocaleDateString(undefined, {month: 'short', day: 'numeric'})}</span>
                     </div>
                   </div>
-                  {post.image && (
-                    <div className="post-img-box">
-                      <img src={`http://127.0.0.1:8000${post.image}`} alt="Skin concern" />
-                    </div>
+                  {post.author_email === email && (
+                    <button className="options-btn" onClick={() => handleDeletePost(post.id)}>
+                      <Trash2 size={18} />
+                    </button>
                   )}
                 </div>
 
+                <div className="post-content">
+                  <h3>{post.title}</h3>
+                  <p>{post.content}</p>
+                </div>
+
+                {post.image && (
+                  <div className="post-image-container">
+                    <img src={`http://127.0.0.1:8000${post.image}`} alt="Community shared" />
+                  </div>
+                )}
+
+                <div className="post-actions">
+                  <button className={`action-pill ${post.isLiked ? 'liked' : ''}`} onClick={() => handleLike(post.id)}>
+                    <Heart size={20} fill={post.isLiked ? "#B76E79" : "none"} />
+                    <span>{post.total_likes}</span>
+                  </button>
+                  <button className="action-pill" onClick={() => toggleComments(post.id)}>
+                    <MessageCircle size={20} />
+                    <span>{post.comments?.length || 0}</span>
+                  </button>
+                </div>
+
                 {post.showComments && (
-                  <CommentBox>
-                    <div className="comments-scroll">
+                  <CommentSection>
+                    <div className="comment-list">
                       {post.comments?.map(c => (
-                        <div key={c.id} className="cmt-item">
-                          <strong>{c.user}</strong> {c.text}
+                        <div key={c.id} className="comment-item">
+                          <span className="user">{c.user}</span>
+                          <span className="text">{c.text}</span>
                         </div>
                       ))}
                     </div>
-                    <div className="cmt-form">
+                    <div className="comment-input-area">
                       <input 
                         type="text" 
-                        placeholder="Share your thoughts..." 
+                        placeholder="Add a comment..." 
                         value={newComment[post.id] || ""} 
                         onChange={(e) => setNewComment({...newComment, [post.id]: e.target.value})} 
                       />
-                      <button onClick={() => handleAddComment(post.id)}><Send size={16} /></button>
+                      <button onClick={() => handleAddComment(post.id)}><Send size={18} /></button>
                     </div>
-                  </CommentBox>
+                  </CommentSection>
                 )}
               </PostCard>
             ))
@@ -312,10 +312,10 @@ const Container = styled.div`
     }
   }
 
-  .main-layout { display: flex; padding: 40px 8%; gap: 40px; max-width: 1600px; margin: 0 auto; }
+  .main-layout { display: flex; padding: 40px 8%; gap: 40px; max-width: 1400px; margin: 0 auto; }
 
   .sidebar-left { width: 220px; 
-    .filter-card { background: white; padding: 25px; border-radius: 24px; border: 1px solid #f0f0f0; }
+    .filter-card { background: white; padding: 25px; border-radius: 24px; border: 1px solid #f0f0f0; position: sticky; top: 120px; }
     h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; color: #999; margin-bottom: 20px; }
     .nav-link { display: flex; align-items: center; gap: 12px; padding: 12px; border-radius: 12px; cursor: pointer; color: #666; font-size: 0.95rem; transition: 0.2s; margin-bottom: 8px;
       &:hover { background: #fff5f6; color: #b76e79; }
@@ -331,7 +331,7 @@ const Container = styled.div`
   }
 
   .sidebar-right { width: 300px;
-    .stats-card { background: white; padding: 30px; border-radius: 24px; border: 1px solid #f0f0f0;
+    .stats-card { background: white; padding: 30px; border-radius: 24px; border: 1px solid #f0f0f0; position: sticky; top: 120px;
       h4 { color: #b76e79; margin-bottom: 25px; font-size: 1.1rem; }
       .stat-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95rem; label { color: #777; } span { font-weight: 700; color: #333; }}
       .action-button { width: 100%; margin-top: 20px; background: #333; color: white; border: none; padding: 14px; border-radius: 15px; font-weight: 600; cursor: pointer; transition: 0.3s; &:hover { background: #000; }}
@@ -342,46 +342,130 @@ const Container = styled.div`
 `;
 
 const PostCard = styled.div`
-  background: white; border-radius: 24px; border: 1px solid #f0f0f0; margin-bottom: 25px; transition: 0.3s ease;
-  &:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.03); transform: translateY(-2px); }
-  
-  .post-inner { display: flex; padding: 30px; gap: 25px; }
-  .post-body { flex: 1; }
-  
-  .author-row { display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-    img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
-    .author-meta { flex: 1; display: flex; flex-direction: column;
-      .name { font-weight: 700; color: #333; font-size: 1rem; }
-      .date { font-size: 0.8rem; color: #bbb; }
+  background: white;
+  border-radius: 28px;
+  border: 1px solid #f2f2f2;
+  margin-bottom: 30px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+
+  &:hover {
+    box-shadow: 0 12px 35px rgba(183,110,121,0.08);
+    transform: translateY(-4px);
+  }
+
+  .post-header {
+    padding: 25px 30px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; border: 2px solid #fff5f6; }
+      .meta {
+        display: flex;
+        flex-direction: column;
+        .author-name { font-weight: 700; color: #333; font-size: 1rem; }
+        .post-date { font-size: 0.8rem; color: #aaa; }
+      }
     }
-    .del-btn { background: none; border: none; color: #ddd; cursor: pointer; transition: 0.2s; &:hover { color: #e74c3c; }}
+    .options-btn { background: none; border: none; color: #ddd; cursor: pointer; transition: 0.2s; &:hover { color: #e74c3c; }}
   }
 
-  .text-content {
-    h3 { font-size: 1.3rem; color: #b76e79; margin-bottom: 12px; font-weight: 600; }
-    p { color: #555; line-height: 1.7; font-size: 0.95rem; }
+  .post-content {
+    padding: 0 30px 20px;
+    h3 { font-size: 1.4rem; color: #b76e79; margin-bottom: 12px; font-weight: 700; }
+    p { color: #555; line-height: 1.8; font-size: 1rem; }
   }
 
-  .interaction-row { display: flex; gap: 15px; margin-top: 25px;
-    .stat-pill { display: flex; align-items: center; gap: 8px; background: #fafafa; border: 1px solid #f0f0f0; padding: 8px 16px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; color: #666; cursor: pointer; transition: 0.2s;
-      &:hover { background: #fff5f6; }
-      &.liked { border-color: #b76e79; color: #b76e79; background: #fff5f6; }
+  .post-image-container {
+    padding: 0 20px;
+    margin-bottom: 20px;
+    img { 
+      width: 100%; 
+      max-height: 450px; 
+      object-fit: cover; 
+      border-radius: 20px;
+      transition: 0.4s;
     }
   }
 
-  .post-img-box { width: 220px; height: 160px; border-radius: 18px; overflow: hidden;
-    img { width: 100%; height: 100%; object-fit: cover; }
+  .post-actions {
+    padding: 0 30px 25px;
+    display: flex;
+    gap: 15px;
+
+    .action-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      background: #fdf6f3;
+      border: none;
+      border-radius: 30px;
+      color: #666;
+      font-weight: 600;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover { background: #fff1f2; color: #b76e79; }
+      &.liked { color: #b76e79; background: #fff1f2; }
+      span { margin-top: 1px; }
+    }
   }
 `;
 
-const CommentBox = styled.div`
-  background: #fdfaf9; padding: 25px; border-top: 1px solid #f0f0f0; border-radius: 0 0 24px 24px;
-  .comments-scroll { max-height: 200px; overflow-y: auto; margin-bottom: 20px;
-    .cmt-item { font-size: 0.9rem; margin-bottom: 10px; color: #444; strong { color: #b76e79; margin-right: 8px; }}
+const CommentSection = styled.div`
+  background: #fdfaf9;
+  padding: 25px 30px;
+  border-top: 1px solid #f9f0ed;
+
+  .comment-list {
+    margin-bottom: 20px;
+    .comment-item {
+      margin-bottom: 12px;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      .user { font-weight: 700; color: #b76e79; margin-right: 10px; }
+      .text { color: #555; }
+    }
   }
-  .cmt-form { display: flex; gap: 12px; background: white; padding: 8px 15px; border-radius: 30px; border: 1px solid #eee;
-    input { flex: 1; border: none; outline: none; font-size: 0.9rem; }
-    button { background: #b76e79; color: white; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; &:hover { transform: scale(1.1); }}
+
+  .comment-input-area {
+    display: flex;
+    gap: 12px;
+    background: white;
+    padding: 6px 6px 6px 20px;
+    border-radius: 50px;
+    border: 1px solid #eee;
+
+    input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+      background: transparent;
+    }
+
+    button {
+      background: #b76e79;
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.2s;
+      &:hover { transform: scale(1.05); background: #a85d68; }
+    }
   }
 `;
 

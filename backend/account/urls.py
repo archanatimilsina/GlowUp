@@ -1,9 +1,9 @@
 from django.contrib import admin
 from django.urls import path,include
 from . import views
-from .views import (
-  UserCountView
-)
+# from .views import (
+#   UserCountView
+# )
 
 urlpatterns = [
     path('api/login/', views.login, name="login"),
@@ -12,5 +12,5 @@ urlpatterns = [
     path('api/forgot-password/', views.forgot_password, name="forgotPassword"),
     path('api/update-skin/', views.update_skin_info, name='update_skin'),
     path('api/upload-profile-pic/', views.upload_profile_pic, name='upload_pic'),
-    path('user-count/',UserCountView.as_view(), name='user-count'),
+    path('user-count/',views.UserCountView.as_view(), name='user-count'),
 ]
