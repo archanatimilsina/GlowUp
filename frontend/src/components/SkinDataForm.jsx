@@ -73,14 +73,14 @@ const SkinDataForm = () => {
       <div className="skin-form-container slide-in">
         <div className="form-header">
           <h1>Tell us about your skin</h1>
-          <p className="subtitle">
+          {/* <p className="subtitle">
             Every face is unique. By sharing your skin type, we can better understand 
             which textures and ingredients will make you glow.
-          </p>
+          </p> */}
         </div>
         
         <SectionTitle>Your Skin Type</SectionTitle>
-        <p className="hint-text">Choose the one that best describes your skin most of the time.</p>
+        {/* <p className="hint-text">Choose the one that best describes your skin most of the time.</p> */}
         
         <div className="grid">
           {["Normal", "Dry", "Oily", "Combination", "Sensitive"].map((t) => (
@@ -98,7 +98,7 @@ const SkinDataForm = () => {
         </div>
 
         <SectionTitle style={{ marginTop: 50 }}>Targeted Concerns</SectionTitle>
-        <p className="hint-text">What are your main goals today? Select all that apply.</p>
+        {/* <p className="hint-text">What are your main goals today? Select all that apply.</p> */}
         
         <div className="pills">
           {primaryConcerns.map((c) => (
@@ -131,7 +131,7 @@ const SkinDataForm = () => {
         <button className="submit-btn" onClick={handleUpdate}>
            Confirm My Skin Profile
         </button>
-        <p className="footer-note">You can update these details anytime from your settings.</p>
+        {/* <p className="footer-note">You can update these details anytime from your settings.</p> */}
       </div>
     </SkinDataContainer>
   );

@@ -3,13 +3,10 @@ from .models import ForumPost, Comment
 
 @admin.register(ForumPost)
 class ForumPostAdmin(admin.ModelAdmin):
-    # What columns to show in the list view
     list_display = ('title', 'author', 'created_at', 'total_likes')
     
-    # Add a search bar for titles and author emails
     search_fields = ('title', 'content', 'author__email')
     
-    # Add a filter sidebar on the right
     list_filter = ('created_at', 'author')
 
 @admin.register(Comment)

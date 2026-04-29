@@ -16,11 +16,9 @@ def train_model(dataset_path):
         
     df = pd.read_csv(dataset_path)
     
-    # We use 4 features to be more accurate
     X = df[['Y', 'H', 'Cr', 'Cb']].values
     y = df['Type'].values
     
-    # Scaler makes sure big numbers (like 200) don't overpower small numbers (like 10)
     X_scaled = scaler.fit_transform(X)
     
     model = RandomForestClassifier(n_estimators=100, random_state=42)
@@ -28,9 +26,7 @@ def train_model(dataset_path):
     print("AI Model Trained Successfully.")
     return model
 
-# --- RUNNING THE SYSTEM ---
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-# Make sure 'skin_tone_new.csv' is in your backend folder!
 DATASET_PATH = os.path.join(BASE_DIR, 'skin_tone_new.csv')
 skin_model = train_model(DATASET_PATH)
 
@@ -38,17 +34,14 @@ def identify_skin_tone(image_path):
     if skin_model is None:
         return None, "Model Error"
 
-    # 1. Get the 4 color numbers from the image
     color_values = skin_detection(image_path)
     
     if np.all(color_values == 0):
         return None, "No Face Detected"
     
-    # 2. Prepare data for the model
     vals_reshaped = color_values.reshape(1, -1)
     vals_scaled = scaler.transform(vals_reshaped)
     
-    # 3. Predict the result
     y_pred = skin_model.predict(vals_scaled)[0]
     
     tone_names = {
@@ -64,7 +57,6 @@ def identify_skin_tone(image_path):
     print(f"Prediction: {result} ({confidence*100:.1f}% confidence)")
     
     return y_pred, result
-
 
 
 

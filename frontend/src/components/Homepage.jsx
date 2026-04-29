@@ -5,8 +5,6 @@ const LandingPage = () => {
   const navigate = useNavigate();
   return (
     <div className="landing">
-
-      {/* HERO SECTION */}
       <section className="hero">
         <div className="hero-text">
           <div className="Badge">Intelligent Beauty</div>
@@ -118,7 +116,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* FORUM HIGHLIGHT SECTION */}
       <section className="forum-highlight">
         <div className="forum-container">
           <div className="forum-image">
@@ -138,7 +135,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* UPDATED SERVICES SECTION WITH 4 UNIQUE PILLARS */}
       <section className="services">
         <h2>Our Core Expertise</h2>
         <div className="services-container">
@@ -170,7 +166,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-container">
           <div className="footer-brand">
@@ -188,7 +183,6 @@ const LandingPage = () => {
             <div className="link-group">
               <h4>Support</h4>
               <a onClick={() => navigate("/brandContact")} style={{cursor: 'pointer'}}>Contact</a>
-              <a href="#">FAQ</a>
               <a onClick={() => navigate("/feedback")} style={{cursor: 'pointer'}}>Feedback</a>
             </div>
 
@@ -206,7 +200,6 @@ const LandingPage = () => {
         </div>
       </footer>
 
-      {/* CSS */}
       <style>{`
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         .landing { background: #fdf6f3; color: #333; overflow-x: hidden; }
