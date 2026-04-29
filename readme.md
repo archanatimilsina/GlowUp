@@ -1,24 +1,15 @@
-# GlowUp
-### Skin Care Product Recommendation System
+#  GlowUp
+###  Skincare Product Recommendation System
 
-## Project Overview
-This project is a **Skin Care Product Recommendation System** designed to help users find the most suitable skin care products based on their skin type. The system not only recommends products using AI but also provides a mini **e-commerce platform** where users can add products to the cart and make purchases.  
-
-The application combines **personalized recommendations** with an intuitive shopping experience to simplify skincare selection.
+GlowUp is a sophisticated skincare companion designed to bridge the gap between complex dermatological needs and accessible product solutions. By leveraging **Machine Learning** and a seamless **React-Django** architecture, GlowUp analyzes skin intelligence—mapping melanin, undertone, and texture—to curate a personalized regimen from our integrated e-commerce catalog.
 
 ---
 
-## Features
-- **Skin Type Based Recommendations:** Users input their skin type, and AI recommends suitable products.  
-- **E-commerce Functionality:** Users can browse products, add them to the cart, and proceed to checkout.  
-- **Product Listings:** Detailed product information including ingredients, usage instructions, and skin type suitability.  
-- **AI Integration:** Machine learning component analyzes user input to provide personalized recommendations.  
-- **Responsive Frontend:** Interactive and user-friendly interface.  
 
 
-## 🧠 How the AI Works
+## How the AI Works
 
-### 1. The Vision Engine: Skin Tone Detection
+### 1. Skin Tone Detection
 The system follows a rigorous pipeline to ensure accuracy regardless of lighting conditions.
 
 * **Face Landmarking:** Uses a pre-trained **MediaPipe** model to identify facial coordinates, cropping out hair and background.
@@ -27,110 +18,71 @@ The system follows a rigorous pipeline to ensure accuracy regardless of lighting
 * **K-Means Clustering:** Pixels are treated as data points in a 4D space ($Y, H, Cr, Cb$). K-Means groups these into clusters, selecting the dominant center to represent the skin tone.
 * **Classification:** Final values are processed by a **RandomForestClassifier** to map the data to 6 categories: *Very Fair, Fair, Medium, Olive, Brown, or Dark.*
 
-
-
-### 2. The Logic Engine: Recommendation System
+### 2. Recommendation System
 Once the user profile is established, the system suggests products using Vector Mathematics.
 
 * **One-Hot Encoding:** User skin concerns and product attributes are converted into binary vectors.
 * **Cosine Similarity:** The system calculates the mathematical "angle" between the User Vector ($\mathbf{A}$) and the Product Vector ($\mathbf{B}$):
 
-$$similarity = \cos(\theta) = \frac{\mathbf{A} \cdot \mathbf{B}}{\|\mathbf{A}\| \|\mathbf{B}\|}$$
 
+---
+
+
+## 🛠️ Tools & Technologies
+* **Frontend:** HTML, CSS, JavaScript, React.js
+* **Backend:** Django, Django REST Framework
+* **AI/ML:** Scikit-Learn, MediaPipe, OpenCV
+* **Database:** SQLite
+
+---
+
+## 🔧 Installation & Setup
+
+> **Note:** It is highly recommended to create a Virtual Environment before installing backend dependencies.
+
+### 💻 Frontend Setup
+```
+cd frontend
+npm install
+npm run dev
+```
+
+### 💻 Backend Setup
+
+```
+cd backend
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate # On Windows use: venv\Scripts\activate
+
+# Install requirements and run
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
+```
 ---
 
 ## 🖼️ Project Gallery
 
-<table style="width:100%; border-collapse: collapse;">
-  <tr>
-    <td width="50%" align="center">
-      <strong> AI Facial Scan</strong><br/>
-      <img src="assets/Skin Tone Analysis Page.png"  style="border-radius: 10px;"/>
-    </td>
- <td width="50%" align="center">
-      <strong>User skin detail form</strong><br/>
-      <img src="assets/User Skin detail Form.png"  style="border-radius: 10px;"/>
-    </td>
- <td width="50%" align="center">
-      <strong>User Profile Page</strong><br/>
-      <img src="assets/Profile Page.png"  style="border-radius: 10px;"/>
-    </td>
- <td width="50%" align="center">
-      <strong>Product page</strong><br/>
-      <img src="assets/Product Page.png" style="border-radius: 10px;"/>
-    </td>
-    </td>
- <td width="50%" align="center">
-      <strong>Product Detail page</strong><br/>
-      <img src="assets/product detail page.png" style="border-radius: 10px;"/>
-    </td>
- <td width="50%" align="center">
-      <strong>Home Page</strong><br/>
-      <img src="assets/LandingPage.png" style="border-radius: 10px;"/>
-    </td>
-    <td width="50%" align="center">
-      <strong>Discussion Forum</strong><br/>
-      <img src="assets/discussion Forum.png"  style="border-radius: 10px;"/>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" align="center">
-      <strong> Cart Page</strong><br/>
-      <img src="assets/CArt Page.png" style="border-radius: 10px;"/>
-    </td>
-    <td width="50%" align="center">
-      <strong>About Page</strong><br/>
-      <img src="assets/AboutPage.png" style="border-radius: 10px;"/>
-    </td>
-    <td width="50%" align="center">
-      <strong>Contact form</strong><br/>
-      <img src="assets/contact Page.png" style="border-radius: 10px;"/>
-    </td>
-    <td width="50%" align="center">
-      <strong>Feedback Form</strong><br/>
-      <img src="assets/Feedback Page.png" style="border-radius: 10px;"/>
-    </td>
-    <td width="50%" align="center">
-      <strong>Create Post</strong><br/>
-      <img src="assets/Create post Page.png" style="border-radius: 10px;"/>
-    </td>
-   
-  </tr>
-</table>
+###  Core Experience
+**Landing Page** ![Home Page](assets/LandingPage.png)
 
----
+**AI Skin Tone Analysis** ![AI Facial Scan](assets/Skin%20Tone%20Analysis%20Page.png)
 
+**User Skin Detail Form** ![User skin detail form](assets/User%20Skin%20detail%20Form.png)
 
+**User Profile Dashboard** ![Profile Page](assets/Profile%20Page.png)
 
+**Product Catalog** ![Product page](assets/Product%20Page.png)
 
+**Product Details** ![Product Detail page](assets/product%20detail%20page.png)
 
-## Tools & Technologies
-**Frontend:**  
-- HTML, CSS, JavaScript  
-- React.js  
+**Discussion Forum** ![Discussion Forum](assets/discussion%20Forum.png)
 
-**Backend:**  
-- Django  
+**Shopping Cart** ![Cart Page](assets/CArt%20Page.png)
 
-**AI/ML:**  
-- Machine learning model product recommendations  
+**Contact & Support** ![Contact Page](assets/contact%20Page.png)
 
-**Database:**  
-- SQLite 
+**User Feedback** ![Feedback Page](assets/Feedback%20Page.png)
 
-
-## Installation & Setup
-
-**Note: Create Virtual Environment**
-
-**Frontend:**  
-cd frontend
-npm install
-npm run dev
-
-**Backend:**  
-cd backend
-pip install -r requirements.txt
-python manage.py migrate
-python manage.py runserver
-
+**Create Community Post** ![Create Post](assets/Create%20post%20Page.png)
