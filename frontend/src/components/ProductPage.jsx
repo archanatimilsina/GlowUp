@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components'; // Added keyframes import
-import SimpleButton from './elementComponent/Button/simpleButton';
+import styled, { keyframes } from 'styled-components'; 
+// import SimpleButton from './elementComponent/Button/simpleButton';
 import ProductCard from './elementComponent/ProductCard';
 import SearchResults from './elementComponent/SearchResults';
 import useUserStore from '../store/useUserStore';
