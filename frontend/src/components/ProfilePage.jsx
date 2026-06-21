@@ -10,7 +10,6 @@ const ProfilePage = () => {
   const navigate = useNavigate();
   const fileInputRef = useRef(null);
 
-  // We pull everything from the store
   const { 
     email, 
     profilePic, 
@@ -21,10 +20,8 @@ const ProfilePage = () => {
     logout
   } = useUserStore();
 
-  // --- SYNC WITH DATABASE ON COMPONENT MOUNT ---
   useEffect(() => {
     const fetchLatestData = async () => {
-      // If no email, we can't fetch.
       if (!email) return;
 
       try {

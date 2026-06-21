@@ -4,4 +4,7 @@ django-cors-headers
 pandas
 requests
 deep-translator
-
+scikit-learn
+numpy
+opencv-python
+mediapipe

@@ -5,23 +5,20 @@ import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
 import { BiMessageRoundedDots } from "react-icons/bi";
 
 const BrandContact = () => {
-  // 1. Setup State to hold form data (Added brand_name)
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
-    brand_name: "", // New Field
+    brand_name: "", 
     subject: "General Inquiry", 
     message: "",
   });
 
   const [loading, setLoading] = useState(false);
 
-  // 2. Handle input changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // 3. Submit to Django Backend
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -39,7 +36,6 @@ const BrandContact = () => {
 
       if (response.ok) {
         alert("Success! Your message and brand info are in our database.");
-        // Reset form
         setFormData({ 
           full_name: "", 
           email: "", 
@@ -71,7 +67,6 @@ const BrandContact = () => {
       <Container>
         <LayoutGrid>
           
-          {/* LEFT COLUMN: THE FORM */}
           <FormCard>
             <IconBadge>
               <BiMessageRoundedDots size={22} />
@@ -81,8 +76,7 @@ const BrandContact = () => {
             <p>Fill out the form below and our team will reach out shortly.</p>
 
             <form onSubmit={handleSubmit}>
-              {/* ROW 1: Name and Email */}
-              <Row>
+=              <Row>
                 <Field>
                   <label>Full Name</label>
                   <input 
@@ -107,7 +101,6 @@ const BrandContact = () => {
                 </Field>
               </Row>
 
-              {/* ROW 2: Brand Name and Subject */}
               <Row>
                 <Field>
                   <label>Brand Name (Optional)</label>
@@ -134,8 +127,7 @@ const BrandContact = () => {
                 </Field>
               </Row>
 
-              {/* ROW 3: Message */}
-              <Field>
+=              <Field>
                 <label>Message</label>
                 <textarea 
                   name="message"
@@ -155,7 +147,6 @@ const BrandContact = () => {
             </form>
           </FormCard>
 
-          {/* RIGHT COLUMN: INFO */}
           <Sidebar>
             <ContactCard>
               <h2>Reach Us</h2>
@@ -207,7 +198,6 @@ const BrandContact = () => {
 
 export default BrandContact;
 
-/* ===================== STYLES ===================== */
 
 const Page = styled.div`
   min-height: 100vh;

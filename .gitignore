@@ -1,32 +1,35 @@
-# Python
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
-db.sqlite3
-.env
-media/
-static/
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
-# Django
-db.sqlite3
-.env
-media/
-static/ 
-# **/migrations/*.py
-# !**/migrations/__init__.py
-backend/forum_posts/
+node_modules
+dist
+dist-ssr
+*.local
 
-# React / Node
-node_modules/
-dist/
-build/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
 .DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
-#AI
-backend/AI/*
-!backend/AI/models
-!backend/AI/requirements.txt
-backend/models
-AI/*
-backend/profile_pics/*
+backend/db.sqlite3
+/backend/__pycache__/
+/backend/*.pyc
+/backend/*.pyo
+/backend/*.pyd
+/backend/db.sqlite3
+/backend/media/
+/backend/Dockerfile
+/backend/seed.py
+.DS_Store

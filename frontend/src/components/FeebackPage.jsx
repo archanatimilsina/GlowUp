@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 const FeedbackPage = () => {
@@ -93,9 +93,6 @@ const FeedbackPage = () => {
   );
 };
 
-
-export default FeedbackPage;
-
 const FeedbackContainer = styled.main`
 display: flex;
 flex-direction: column;
@@ -169,3 +166,6 @@ input::placeholder{
             transition:all 0.35s ease-in;
         }
 `;
+
+
+export default FeedbackPage;

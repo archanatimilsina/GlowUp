@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/useUserStore";
-import AlertBox from "../components/elementComponent/DeleteAlert"; // Assumes you saved the previous component here
+import AlertBox from "./elementComponent/DeleteAlert"; 
 
 const CartPage = () => {
   const navigate = useNavigate();
@@ -9,7 +9,6 @@ const CartPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // --- Alert States ---
   const [isAlertOpen, setIsAlertOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState(null);
 
@@ -67,7 +66,6 @@ const CartPage = () => {
     }
   };
 
-  // --- Updated Delete Logic ---
   const openDeleteAlert = (id) => {
     setItemToDelete(id);
     setIsAlertOpen(true);
@@ -106,7 +104,6 @@ const CartPage = () => {
 
   return (
     <>
-      {/* Custom Alert Box */}
       <AlertBox 
         isOpen={isAlertOpen}
         msg="Are you sure you want to remove this item from your skincare bag?"
