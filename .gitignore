@@ -35,3 +35,6 @@ backend/db.sqlite3
 .DS_Store
 archanaArea
 .env
+backend/forum_posts
+backend/backend.md
+backend/static/uploads
