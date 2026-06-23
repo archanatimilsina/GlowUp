@@ -27,6 +27,14 @@ Once the user profile is established, the system suggests products using Vector 
 
 ---
 
+---
+
+## 🔗 Live Demo
+
+> 🌐 **Try it live →** [dairy-management-system-rho.vercel.app](https://glowup-jet-one.vercel.app/)
+
+---
+
 
 ## 🛠️ Tools & Technologies
 * **Frontend:** HTML, CSS, JavaScript, React.js
