@@ -12,7 +12,7 @@ import FaceScanningPage from './components/FaceScanningPage';
 import Homepage from './components/Homepage';
 import BuyPage from './components/BuyPage';
 import CartPage from './components/CartPage.jsx';
-import ProductDetailPage from './components/elementComponent/productDetailPage';
+import ProductDetailPage from './components/elementComponent/ProductDetailPage';
 import BrandContact from './components/BrandContact';
 import Paymentpage from './components/PaymentPage.jsx';
 import DiscussionForum from './components/DiscussionForum/DiscussionForum.jsx';
