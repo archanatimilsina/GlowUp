@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+const API_BASE = import.meta.env.VITE_API_URL;
 
 const useProductfetch =(url)=>
 {
@@ -12,7 +13,7 @@ const fetchData= async ()=>
 setLoading(true);
 setError(null);
 try{
-const response = await fetch(url);
+const response = await fetch(`${API_BASE}/${url}`);
 if(!response.ok) throw new Error(`HTTP Error: ${response.status}`);
 const result= await response.json();
 setData(result)
