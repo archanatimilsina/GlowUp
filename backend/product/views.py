@@ -77,7 +77,6 @@ def dataset_load(request):
    dataset = pd.read_csv(file_path)
    # dataset['notable_effects'] = dataset['notable_effects'].map(ast.literal_eval)
    # dataset['skin_type']= dataset['skin_type'].map(ast.literal_eval)
-   # 2. Fix the decimal error: Round price to 2 decimal places
    if 'price' in dataset.columns:
         dataset['price'] = pd.to_numeric(dataset['price'], errors='coerce').round(2)
    # Convert dataset to list of dictionaries
