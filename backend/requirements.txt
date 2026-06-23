@@ -1,4 +1,4 @@
-Django==6.0
+Django==5.1.15
 django-cors-headers==4.9.0
 django-supabase-storage==1.0.1
 djangorestframework==3.17.1
@@ -6,8 +6,7 @@ django-storages
 boto3 
 whitenoise
 dj-database-url==3.1.2
-pillow==12.2.0
-postgrest==2.31.0
+Pillow==12.2.0
 python-dotenv==1.2.2
 supabase==2.31.0
 supabase-auth==2.31.0
