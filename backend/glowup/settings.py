@@ -18,7 +18,8 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+HF_SPACE_URL = os.environ.get("HF_SPACE_URL")
+HF_API_TOKEN = os.environ.get("HF_API_TOKEN")
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT =os.path.join(BASE_DIR, 'media')

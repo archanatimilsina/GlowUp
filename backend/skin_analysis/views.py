@@ -5,8 +5,10 @@ from io import BytesIO
 from PIL import Image
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+import requests
+from django.conf import settings
 
-from AI.models.skin_detection_knn import identify_skin_tone
+# from AI.models.skin_detection_knn import identify_skin_tone
 
 @csrf_exempt  
 def upload_skin_analysis(request):
@@ -33,14 +35,25 @@ def upload_skin_analysis(request):
             temp_path = os.path.join(temp_dir, 'uploaded_face.png')
             image.save(temp_path)
 
-            tone_id, result_name = identify_skin_tone(temp_path)
+            # tone_id, result_name = identify_skin_tone(temp_path)
 
-            return JsonResponse({
-                "tone": str(tone_id), 
-                "tone_name": result_name,
-                "status": "success",
+            # return JsonResponse({
+            #     "tone": str(tone_id), 
+            #     "tone_name": result_name,
+            #     "status": "success",
                 
+            # }, status=200)
+            payload = {"data": [f"data:image/png;base64,{encoded}"]}
+            headers = {"Authorization": f"Bearer {settings.HF_API_TOKEN}"}
+            response = requests.post(f"{settings.HF_SPACE_URL}/api/predict", json=payload, headers=headers, timeout=60)
+            response.raise_for_status()
+            result = response.json()["data"][0]
+            return JsonResponse({
+                  "tone": result.get("tone"),
+                  "tone_name": result.get("tone_name"),
+                  "status": result.get("status")
             }, status=200)
+             
 
         except Exception as e:
             return JsonResponse({"error": str(e)}, status=500)

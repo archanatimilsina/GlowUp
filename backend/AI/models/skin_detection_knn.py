@@ -9,7 +9,6 @@ skin_model = None
 scaler = StandardScaler()
 
 def train_model(dataset_path):
-    """Trains the AI using your CSV file."""
     if not os.path.exists(dataset_path):
         print(f"ERROR: Dataset not found at {dataset_path}")
         return None

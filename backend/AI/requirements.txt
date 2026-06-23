@@ -1,7 +1,0 @@
-deep-translator
-pandas
-scikit-learn
-requests
-numpy
-opencv-python
-mediapipe
