@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import useFetch from '../hooks/useFetch';
 import { useNavigate } from "react-router-dom";
 
 const Register = () => {
-  const url = "http://127.0.0.1:8000/api/register/";
+  const url = "api/register/";
   const { loading, fetchData } = useFetch(url);
   const [formData, setFormData] = useState({
     first_name: "",
@@ -65,7 +65,6 @@ const Register = () => {
           password: "",
           confirm_password: ""
         });
-        // Wait a second before navigating so they can see the success message
         setTimeout(() => navigate('/login'), 1500);
       } else {
         setErrorMessage(result.error || "Registration failed.");
@@ -85,24 +84,6 @@ const Register = () => {
         {successMessage && <SuccessText>{successMessage}</SuccessText>}
 
         <Form onSubmit={handleSubmit}>
-          {/* <InputGroup>
-            <Input
-              type="text"
-              placeholder="First Name"
-              name="first_name"
-              onChange={handleChange}
-              value={formData.first_name}
-              required
-            />
-            <Input
-              type="text"
-              placeholder="Last Name"
-              name="last_name"
-              onChange={handleChange}
-              value={formData.last_name}
-              required
-            />
-          </InputGroup> */}
           
           <Input
             type="text"
@@ -150,10 +131,9 @@ const Register = () => {
   );
 };
 
-// --- STYLES ---
 
 const Container = styled.div`
-  background-color: #fffafa; /* Snowy Peach background */
+  background-color: #fffafa; 
   min-height: 100vh;
   display: flex;
   justify-content: center;
@@ -175,7 +155,7 @@ const FormWrapper = styled.div`
 
 const Title = styled.h2`
   margin-bottom: 8px;
-  color: #d16b5f; /* Deep Peach */
+  color: #d16b5f;
   font-size: 32px;
   font-weight: 800;
 `;
@@ -191,14 +171,6 @@ const Form = styled.form`
   flex-direction: column;
 `;
 
-const InputGroup = styled.div`
-  display: flex;
-  gap: 10px;
-  @media (max-width: 400px) {
-    flex-direction: column;
-    gap: 0;
-  }
-`;
 
 const Input = styled.input`
   padding: 14px 18px;
@@ -223,7 +195,7 @@ const Button = styled.button`
   padding: 15px;
   border-radius: 12px;
   border: none;
-  background-color: #f1897d; /* Main Peach Color */
+  background-color: #f1897d;
   color: #fff;
   font-weight: 700;
   cursor: pointer;

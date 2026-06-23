@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import useUserStore from '../store/useUserStore';
@@ -139,7 +139,7 @@ const SkinDataForm = () => {
 
 export default SkinDataForm;
 
-// --- STYLES ---
+
 
 const slideInAnimation = keyframes`
   from { opacity: 0; transform: translateY(30px); }

@@ -1,17 +1,11 @@
-import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const BuyPage = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  
-  // Get items passed from CartPage
   const items = location.state?.items || [];
-
   const shipping = 50;
   const discountPercent = 20; 
-
-  // Math Calculations
   const rawSubtotal = items.reduce((acc, item) => acc + (item.price * item.qty), 0);
   const discountAmount = (rawSubtotal * discountPercent) / 100;
   const finalSubtotal = rawSubtotal - discountAmount;
@@ -100,7 +94,6 @@ const BuyPage = () => {
       <div className="checkout-wrapper">
         <div className="checkout-card">
           
-          {/* Top Back Button */}
           <div className="back-nav">
             <button className="btn-back" onClick={() => navigate(-1)}>
               ← Back to Cart

@@ -1,11 +1,8 @@
 import React from "react";
 import confetti from "canvas-confetti";
 
-// Destructure { skin_tone, isOpen, onClose } from props
 const Alertbox1 = ({ skin_tone, isOpen, onClose }) => {
-  
-  // Trigger confetti only when the popup opens
-  React.useEffect(() => {
+    React.useEffect(() => {
     if (isOpen) {
       confetti({
         particleCount: 150,

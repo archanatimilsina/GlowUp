@@ -1,4 +1,3 @@
-import React from 'react'; 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
 import AddToCartButton from './Button/AddToCartBtn';
@@ -7,12 +6,11 @@ const ProductCard = ({ product, onAddToCart, isInCart }) => {
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`/productDetailPage/${product.id}`);
+    navigate(`productDetailPage/${product.id}`);
   };
 
   const handleButtonClick = (e) => {
     e.stopPropagation(); 
-    // We only call the add function if the item isn't already there
     if (!isInCart) {
       onAddToCart();   
     }
@@ -74,7 +72,6 @@ const ProductCard = ({ product, onAddToCart, isInCart }) => {
 
 export default ProductCard;
 
-// --- STYLED COMPONENTS ---
 
 const Card = styled.div` 
   width: 280px; 

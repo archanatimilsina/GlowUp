@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import { AlertTriangle, X } from "lucide-react";
 
@@ -32,7 +31,6 @@ const AlertBox = ({ isOpen, msg, onDelete, onCancel }) => {
 
 export default AlertBox;
 
-// --- STYLED COMPONENTS ---
 
 const Overlay = styled.div`
   position: fixed;

@@ -1,4 +1,3 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
@@ -27,7 +26,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* FEATURES */}
       <section className="features">
         <div className="card">
           <h3>Value Driven</h3>
@@ -45,7 +43,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* ✅ HORIZONTAL PRODUCTS SECTION */}
       <section className="products">
         <h2> Skincare Essentials</h2>
 

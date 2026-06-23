@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/useUserStore";
@@ -37,7 +37,7 @@ const FaceScanningPage = () => {
       const base64data = reader.result;
 
       try {
-        const response = await fetch('http://127.0.0.1:8000/skintoneAnalysis/upload', {
+        const response = await fetch('skintoneAnalysis/upload', {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ file: base64data }),
@@ -46,7 +46,7 @@ const FaceScanningPage = () => {
         const data = await response.json();
         
         if (data.tone_name) {
-          const updateResponse = await fetch('http://127.0.0.1:8000/skintoneAnalysis/skintoneupdate/', {
+          const updateResponse = await fetch('skintoneAnalysis/skintoneupdate/', {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -110,7 +110,7 @@ const FaceScanningPage = () => {
         <div className="upload-section">
           <form onSubmit={handleStartAnalysis}>
             <label htmlFor="file-upload" className="custom-file-upload">
-              {selectedImage ? "✅ Image Selected" : "📷 Choose Skin Photo"}
+              {selectedImage ? "Image Selected" : "Choose Skin Photo"}
             </label>
             <input 
               id="file-upload" 
@@ -143,7 +143,6 @@ const FaceScanningPage = () => {
               alt="AI Face Scan"
               className={selectedImage ? "scan-image" : "scan-image placeholder"}
             />
-            {/* The scanning line only appears when an image IS selected, to show it's working */}
             {selectedImage && loading && <div className="scan-line"></div>}
         </div>
 
@@ -163,7 +162,6 @@ const FaceScanningPage = () => {
 
 export default FaceScanningPage;
 
-// --- STYLES ---
 
 const scanMove = keyframes`
   0% { top: 0%; }
@@ -269,7 +267,7 @@ const FaceScanContainer = styled.main`
 
     .placeholder {
         opacity: 0.6;
-        filter: sepia(0.2) saturate(1.2); /* Gives it a warmer, peach-compatible tone */
+        filter: sepia(0.2) saturate(1.2); 
     }
 
     .scan-line {

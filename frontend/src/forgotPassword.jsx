@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import  {useState} from "react";
 import styled from "styled-components";
 import useFetch from '../hooks/useFetch'
 import { useNavigate } from "react-router-dom";
@@ -76,7 +76,6 @@ const result = await fetchData(options);
   );
 };
 
-// Styled Components
 const Container = styled.div`
   background-color: #86A788;
   height: 100vh;

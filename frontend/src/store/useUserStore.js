@@ -10,7 +10,6 @@ const useUserStore = create((set) => ({
     username: localStorage.getItem("username"),
 
     setUserData: (data) => {
-        // 2. This part is smart: it saves whatever you pass into localStorage
         Object.keys(data).forEach((key) => {
             if (data[key] !== undefined && data[key] !== null) {
                 localStorage.setItem(key, data[key]);
@@ -26,10 +25,9 @@ const useUserStore = create((set) => ({
             const data = await response.json();
             
             if (response.ok) {
-                // 3. Map the Database names (underscores) to Store names (camelCase)
                 const freshData = {
-                    skin_tone: data.skin_tone, // Saving as underscore in localStorage
-                    skinTone: data.skin_tone,  // Saving as camelCase in Store state
+                    skin_tone: data.skin_tone, 
+                    skinTone: data.skin_tone,  
                     skin_type: data.skin_type,
                     skinType: data.skin_type,
                     skin_concerns: data.skin_concerns,

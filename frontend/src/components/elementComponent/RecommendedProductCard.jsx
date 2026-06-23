@@ -1,4 +1,3 @@
-import React from 'react'; 
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom'; 
 
@@ -30,15 +29,10 @@ const RecommendedProductCard = ({ product, onAddToCart, isInCart }) => {
 
   return (
     <StyledCard onClick={handleCardClick}>
-      {/* Visual background element for interest */}
       <CardGlow color={isInCart ? "#28a745" : "#6d5dfc"} />
-      
-      {/* <Badge>Recommended</Badge> */}
-
       <Content>
         <ImageSection>
           <img src={product.picture_src} alt={product.product_name} />
-          {/* Quick Add Overlay that covers the image area on hover */}
           <QuickAddOverlay className="overlay" onClick={handleQuickAdd} isAdded={isInCart}>
             {isInCart ? "In Bag ✓" : "Quick Add +"}
           </QuickAddOverlay>
@@ -99,20 +93,6 @@ const CardGlow = styled.div`
   filter: blur(70px);
   opacity: 0.08;
   pointer-events: none;
-`;
-
-const Badge = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  font-size: 9px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #6d5dfc;
-  background: #6d5dfc15;
-  padding: 4px 10px;
-  border-radius: 100px;
 `;
 
 const Content = styled.div`

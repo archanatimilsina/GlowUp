@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useNavigate } from "react-router-dom";
 
@@ -27,7 +27,6 @@ const AboutUs = () => {
     <PageContainer>
       <div className="container">
         
-        {/* --- HERO SECTION --- */}
         <HeroSection>
           <div className="hero-text">
             <Badge>OUR PHILOSOPHY</Badge>
@@ -52,7 +51,6 @@ const AboutUs = () => {
           </div>
         </HeroSection>
 
-        {/* --- SKIN TYPES SECTION --- */}
         <SectionHeader>
           <h2>Decoding Skin Intelligence</h2>
           <p>Every journey begins with a name. Which profile is yours?</p>
@@ -72,7 +70,6 @@ const AboutUs = () => {
           ))}
         </CardGrid>
 
-        {/* --- TONE SECTION --- */}
         <ToneSection>
           <div className="tone-img">
             <img 
@@ -104,7 +101,6 @@ const AboutUs = () => {
           </div>
         </ToneSection>
 
-        {/* --- NEW SKIN TONE SPECTRUM SECTION --- */}
         <SectionHeader style={{marginTop: '120px'}}>
           <h2>The Spectrum of Tone</h2>
           <p>Our AI recognizes and celebrates the full range of human luminosity.</p>
@@ -126,7 +122,6 @@ const AboutUs = () => {
 
 export default AboutUs;
 
-// --- STYLED COMPONENTS ---
 
 const fadeIn = keyframes`
   from { opacity: 0; transform: translateY(20px); }
@@ -134,7 +129,7 @@ const fadeIn = keyframes`
 `;
 
 const PageContainer = styled.div`
-  background: #fffafa; /* Snowy Peach */
+  background: #fffafa;
   min-height: 100vh;
   padding-bottom: 120px;
   font-family: 'Plus Jakarta Sans', sans-serif;
@@ -292,7 +287,6 @@ const TextLink = styled.span`
   &:hover { color: #d16b5f; text-decoration: underline; }
 `;
 
-/* --- NEW TONE STYLES --- */
 
 const ToneGrid = styled.div`
   display: grid;

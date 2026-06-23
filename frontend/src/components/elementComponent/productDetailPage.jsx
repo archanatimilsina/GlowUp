@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 
@@ -11,7 +11,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchSingleProduct = async () => {
       try {
-        const response = await fetch(`http://127.0.0.1:8000/product/view/${id}/`);
+        const response = await fetch(`product/view/${id}/`);
         if (!response.ok) throw new Error("Product not found");
         
         const data = await response.json();
@@ -55,14 +55,12 @@ const ProductDetail = () => {
         <BackButton onClick={() => navigate(-1)}>← Back to Shop</BackButton>
         
         <Grid>
-          {/* 1. IMAGE CARD */}
           <Card className="image-card">
             <MainImage>
               <img src={product.picture_src} alt={product.product_name} />
             </MainImage>
           </Card>
 
-          {/* 2. PRODUCT INFO CARD */}
           <Card className="product-card">
             <BrandBadge>{product.brand}</BrandBadge>
             <h1>{product.product_name}</h1>
@@ -79,7 +77,6 @@ const ProductDetail = () => {
             </Actions>
           </Card>
 
-          {/* 3. SKIN PROFILE CARD */}
           <Card className="profile-card">
             <Section>
               <strong>Suitable for Skin Types</strong>
@@ -106,7 +103,6 @@ const ProductDetail = () => {
           </Card>
         </Grid>
 
-        {/* 4. FULL DESCRIPTION */}
         <DescriptionBox>
           <h2>Description</h2>
           <p>{product.description}</p>
@@ -118,12 +114,12 @@ const ProductDetail = () => {
 
 export default ProductDetail;
 
-// --- STYLED COMPONENTS ---
+
 
 const Page = styled.main`
-  --bg: #fffafa; /* Snowy Peach background */
+  --bg: #fffafa; 
   --primary: #f4a299;
-  --primary2: #f1897d; /* Your main color */
+  --primary2: #f1897d; 
   --text-dark: #d16b5f;
   --muted: #a38b88;
   --card-shadow: 0 15px 35px rgba(241, 137, 125, 0.08);

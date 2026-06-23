@@ -27,7 +27,7 @@ const ProductPage = () => {
         return;
       }
       try {
-        const response = await fetch(`http://127.0.0.1:8000/product/cart/view/?email=${email}`);
+        const response = await fetch(`product/cart/view/?email=${email}`);
         const cartData = await response.json();
         const ids = cartData.map(item => item.product_id); 
         setCartItemIds(ids);
@@ -45,7 +45,7 @@ const ProductPage = () => {
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/product/cart/add/", {
+      const response = await fetch("product/cart/add/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email: email, product_id: productId })
@@ -62,7 +62,7 @@ const ProductPage = () => {
   useEffect(() => {
     const fetchProductData = async () => {
       try {
-        const response = await fetch("http://127.0.0.1:8000/product/view/", { method: "GET" });
+        const response = await fetch("product/view/", { method: "GET" });
         const json = await response.json();
         setData(json);
         setFilteredData(json);
@@ -77,7 +77,7 @@ const ProductPage = () => {
     const fetchRecommendations = async () => {
       if (email) {
         try {
-          const response = await fetch(`http://127.0.0.1:8000/product/recommend/`, {
+          const response = await fetch(`product/recommend/`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ email: email })
@@ -162,7 +162,6 @@ const ProductPage = () => {
           {recommend && recommendedProducts.length > 0 && (
             <>
               <h3 className="fade-in">Recommended for you</h3>
-              {/* Added slide-in class here */}
               <div className="RecommendedProducts slide-in">
                 {recommendedProducts.map((item, index) => {
                   const p = item.product || item;

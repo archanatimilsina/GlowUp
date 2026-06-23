@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 import styled from "styled-components";
 import { FiEdit2, FiChevronRight } from "react-icons/fi";
 import { MdOutlineMedicalServices } from "react-icons/md";
@@ -26,16 +26,16 @@ const ProfilePage = () => {
 
       try {
         console.log("Fetching latest data for:", email);
-        const response = await fetch(`http://127.0.0.1:8000/api/get-profile/?email=${email}`);
+        const response = await fetch(`api/get-profile/?email=${email}`);
         const data = await response.json();
 
         if (response.ok) {
           console.log("Database Response:", data);
           
           setUserData({
-            skinTone: data.skin_tone,    // database: skin_tone -> store: skinTone
-            skinType: data.skin_type,    // database: skin_type -> store: skinType
-            skinConcerns: data.skin_concerns, // database: skin_concerns -> store: skinConcerns
+            skinTone: data.skin_tone,    
+            skinType: data.skin_type,    
+            skinConcerns: data.skin_concerns, 
             profilePic: data.profile_pic || profilePic
           });
         }
@@ -45,7 +45,7 @@ const ProfilePage = () => {
     };
 
     fetchLatestData();
-  }, [email, setUserData]); 
+  }, [email,profilePic,setUserData]); 
 
   const handleEditClick = () => {
     fileInputRef.current.click();
@@ -60,7 +60,7 @@ const ProfilePage = () => {
     formData.append("email", email); 
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/upload-profile-pic/", {
+      const response = await fetch("api/upload-profile-pic/", {
         method: "POST",
         body: formData,
       });
@@ -125,7 +125,6 @@ const ProfilePage = () => {
         <ConcernCard>
           <div>
             <span>Primary Skin Concerns</span><br />
-            {/* We use a span here to ensure long text wraps correctly */}
             <p className="concerns-list">
                 {skinConcerns || "No concerns listed yet"}
             </p>
@@ -156,7 +155,6 @@ const ProfilePage = () => {
 
 export default ProfilePage;
 
-// --- STYLED COMPONENTS ---
 
 const SkinDataform = styled.main`
   min-height: 90vh;

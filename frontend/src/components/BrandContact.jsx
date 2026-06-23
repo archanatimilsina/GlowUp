@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import  { useState } from "react";
 import styled from "styled-components";
 import { FiChevronRight, FiPhoneCall } from "react-icons/fi";
 import { HiOutlineMail, HiOutlineLocationMarker } from "react-icons/hi";
@@ -24,7 +24,7 @@ const BrandContact = () => {
     setLoading(true);
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/contact/create/", {
+      const response = await fetch("contact/create/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -221,12 +221,6 @@ const Logo = styled.div`
   b { font-size: 22px; }
 `;
 
-const Nav = styled.nav`
-  font-size: 13px; font-weight: 600; color: #94a3b8;
-  display: flex; gap: 10px;
-  a { text-decoration: none; color: inherit; }
-  a:hover { color: #6d5dfc; }
-`;
 
 const Container = styled.div`
   max-width: 1100px;

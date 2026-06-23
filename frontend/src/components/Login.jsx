@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import useFetch from '../hooks/useFetch';
 import { useNavigate } from "react-router-dom";
 import useUserStore from "../store/useUserStore";
 
 const Login = () => {
-  const url = "http://127.0.0.1:8000/api/login/";
+  const url = "api/login/";
   const { loading, fetchData } = useFetch(url);
   const [formData, setFormData] = useState({
     'emailOrUsername': "",
@@ -26,8 +26,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorMessage(null); // Clear previous errors
-    
+    setErrorMessage(null);
     const options = {
       method: "POST",
       headers: {
@@ -44,15 +43,11 @@ const Login = () => {
     if (result.message) {
       setSuccessMessage(result.message);
       
-      const userData = result.data; // This is the data coming from your Django backend
-      
-      // Prepare the data to sync with your Zustand store
-      // We map the backend names (underscore) to your store names (camelCase)
+      const userData = result.data; 
       const dataToStore = {
         email: userData.email,
         username: userData.username,
         isLoggedIn: true,
-        // Sync Skin Data immediately
         skin_tone: userData.skin_tone,
         skinTone: userData.skin_tone,
         skin_type: userData.skin_type,
@@ -61,12 +56,10 @@ const Login = () => {
         skinConcerns: userData.skin_concerns,
       };
 
-      // Handle Profile Picture URL
       if (userData.profilePic) {
-        dataToStore.profilePic = `http://127.0.0.1:8000${userData.profilePic}`;
+        dataToStore.profilePic = `/${userData.profilePic}`;
       }
 
-      // Save everything to Store and LocalStorage
       setUserData(dataToStore);
       localStorage.setItem("isLoggedIn", "true");
 
@@ -117,11 +110,8 @@ const Login = () => {
     </Container>
   );
 };
-
-// --- STYLES (Snowy Peach Theme) ---
-
 const Container = styled.div`
-  background-color: #fffafa; /* Snowy Peach background */
+  background-color: #fffafa;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -141,7 +131,7 @@ const FormWrapper = styled.div`
 
 const Title = styled.h2`
   margin-bottom: 8px;
-  color: #d16b5f; /* Deep Peach */
+  color: #d16b5f;
   font-size: 32px;
   font-weight: 800;
 `;
@@ -178,7 +168,7 @@ const Button = styled.button`
   padding: 15px;
   border-radius: 12px;
   border: none;
-  background-color: #f1897d; /* Main Peach Color */
+  background-color: #f1897d;
   color: #fff;
   font-weight: 700;
   cursor: pointer;

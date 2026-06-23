@@ -16,7 +16,7 @@ const CartPage = () => {
     const fetchCart = async () => {
       if (!email) return;
       try {
-        const response = await fetch(`http://127.0.0.1:8000/product/cart/view/?email=${email}`);
+        const response = await fetch(`product/cart/view/?email=${email}`);
         const data = await response.json();
         
         const formattedData = data.map(item => ({
@@ -56,7 +56,7 @@ const CartPage = () => {
     );
 
     try {
-      await fetch("http://127.0.0.1:8000/product/cart/update/", {
+      await fetch("product/cart/update/", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ cart_id: id, quantity: newQty })
@@ -75,7 +75,7 @@ const CartPage = () => {
     if (!itemToDelete) return;
 
     try {
-      const response = await fetch(`http://127.0.0.1:8000/product/cart/delete/${itemToDelete}/`, {
+      const response = await fetch(`product/cart/delete/${itemToDelete}/`, {
         method: "DELETE",
       });
 
