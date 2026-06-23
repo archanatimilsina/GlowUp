@@ -34,3 +34,4 @@ backend/db.sqlite3
 /backend/seed.py
 .DS_Store
 archanaArea
+.env
